@@ -94,7 +94,7 @@ def button(update: Update, _: CallbackContext) -> None:
         bot.sendMessage(update.effective_user.id,text=i)
 
     
-    search=f"https://twitter.com/search?q=verified%20"+city+"%20"+str(query.data)+"%20-'not%20verified'%20-'un%20verified'+'urgent%20 unverified%20 needed%20 required%20 need%20 needs%20 requirement%20-filter:retweets&f=live"
+    search=f"https://twitter.com/search?q=verified%20"+city+"%20"+str(query.data)+"%20-'not%20verified'%20-'un%20verified'+'urgent'-filter:retweets&f=live"
     
     bot.sendMessage(update.effective_user.id,text="𝐓𝐨 𝐯𝐢𝐞𝐰 𝐚𝐥𝐥 𝐭𝐡𝐞 𝐫𝐞𝐬𝐮𝐥𝐭𝐬 𝐜𝐥𝐢𝐜𝐤 𝐭𝐡𝐢𝐬 𝐥𝐢𝐧𝐤:\n")
     bot.sendMessage(update.effective_user.id,text=search)

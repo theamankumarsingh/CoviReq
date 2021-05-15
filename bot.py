@@ -33,11 +33,6 @@ def menu(update: Update, _: CallbackContext) -> None:
             InlineKeyboardButton("Oxygen Cylinders", callback_data='Oxygen%20Cylinders'),
             InlineKeyboardButton("Plasma", callback_data='Plasma')
         ],
-        [
-            InlineKeyboardButton("Vaccination", callback_data='Vaccination'),
-            InlineKeyboardButton("Food", callback_data='Food')
-        ],
-
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -55,10 +50,10 @@ def city(update, context,*args):
 
 def scrapetweets(city,option):
     
-    new_search = "verified "+ city +" "+ option  +" -'not verified' -'un verified' -filter:retweets -urgent -unverified -needed -required -need -needs -requirement "
+    new_search = city +" "+ option + " -filter:retweets -verified -unverified -available" + " urgent AND required" # " required OR patients OR needed OR attendants OR #required"
     link=[]
 
-    for tweet in tweepy.Cursor(api.search, q=new_search, lang="en",count=100,since=dt).items(5):
+    for tweet in tweepy.Cursor(api.search, q=new_search, lang="en",count=100).items(5):
 
         try: 
             data = [tweet.id]
@@ -99,7 +94,7 @@ def button(update: Update, _: CallbackContext) -> None:
         bot.sendMessage(update.effective_user.id,text=i)
 
     
-    search=f"https://twitter.com/search?q=verified%20"+city+"%20"+str(query.data)+"%20-'not%20verified'%20-'un%20verified'%20-urgent%20-unverified%20-needed%20-required%20-need%20-needs%20-requirement%20-filter:retweets&f=live"
+    search=f"https://twitter.com/search?q=verified%20"+city+"%20"+str(query.data)+"%20-'not%20verified'%20-'un%20verified'+'urgent%20 unverified%20 needed%20 required%20 need%20 needs%20 requirement%20-filter:retweets&f=live"
     
     bot.sendMessage(update.effective_user.id,text="𝐓𝐨 𝐯𝐢𝐞𝐰 𝐚𝐥𝐥 𝐭𝐡𝐞 𝐫𝐞𝐬𝐮𝐥𝐭𝐬 𝐜𝐥𝐢𝐜𝐤 𝐭𝐡𝐢𝐬 𝐥𝐢𝐧𝐤:\n")
     bot.sendMessage(update.effective_user.id,text=search)

@@ -11,6 +11,7 @@ from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, Callback
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 access_token = environ['access_token']
 access_token_secret = environ['access_token_secret']
 consumer_key = environ['consumer_key']
@@ -32,6 +33,10 @@ def menu(update: Update, _: CallbackContext) -> None:
         [
             InlineKeyboardButton("Oxygen Cylinders", callback_data='Oxygen%20Cylinders'),
             InlineKeyboardButton("Plasma", callback_data='Plasma')
+        ],
+        [
+            InlineKeyboardButton("Food", callback_data='Food'),
+            InlineKeyboardButton("Ambulance", callback_data='Ambulance'),
         ],
     ]
 

@@ -38,6 +38,11 @@ def menu(update: Update, _: CallbackContext) -> None:
             InlineKeyboardButton("Food", callback_data='Food'),
             InlineKeyboardButton("Ambulance", callback_data='Ambulance'),
         ],
+        [
+            InlineKeyboardButton("Blood", callback_data='Blood'),
+            InlineKeyboardButton("Amphotericin", callback_data='Amphotericin'),
+        ],
+
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)

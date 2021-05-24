@@ -37,8 +37,8 @@ def menu(update: Update, _: CallbackContext) -> None:
             InlineKeyboardButton("Plasma", callback_data='Plasma')
         ],
         [
-            InlineKeyboardButton("Vaccination", callback_data='Vaccination'),
-            InlineKeyboardButton("Food", callback_data='Food')
+            InlineKeyboardButton("Food", callback_data='Food'),
+            InlineKeyboardButton("Ambulance", callback_data='Ambulance'),
         ],
         [
             InlineKeyboardButton("Blood", callback_data='Blood'),
@@ -87,12 +87,12 @@ def time_converter(time_input):
 
 def scrapetweets(city,option):
     
-    new_search = "verified "+ city +" "+ option  +" -'not verified' -'un verified' -filter:retweets -urgent -unverified -needed -required -need -needs -requirement "
+    new_search = city +" "+ option + " -filter:retweets -verified -unverified -available" + " urgent AND required" # " required OR patients OR needed OR attendants OR #required"
     link=[]
 
-    for tweet in tweepy.Cursor(api.search, q=new_search, lang="en",count=100,since=dt).items(5):
+    for tweet in tweepy.Cursor(api.search, q=new_search, lang="en",count=100).items(5):
 
-        try: 
+        try:
             data = [tweet.id]
             status = api.get_status(tweet.id)
             created_at = status.created_at
@@ -134,8 +134,7 @@ def button(update: Update, _: CallbackContext) -> None:
     for i in link:
         bot.sendMessage(update.effective_user.id,text=i)
 
-    
-    search=f"https://twitter.com/search?q=verified%20"+city+"%20"+str(query.data)+"%20-'not%20verified'%20-'un%20verified'%20-urgent%20-unverified%20-needed%20-required%20-need%20-needs%20-requirement%20-filter:retweets&f=live"
+    search=f"https://twitter.com/search?q=verified%20"+city+"%20"+str(query.data)+"%20-'not%20verified'%20-'un%20verified'+'urgent'-filter:retweets&f=live"
     
     bot.sendMessage(update.effective_user.id,text="𝐓𝐨 𝐯𝐢𝐞𝐰 𝐚𝐥𝐥 𝐭𝐡𝐞 𝐫𝐞𝐬𝐮𝐥𝐭𝐬 𝐜𝐥𝐢𝐜𝐤 𝐭𝐡𝐢𝐬 𝐥𝐢𝐧𝐤:\n")
     bot.sendMessage(update.effective_user.id,text=search)
@@ -148,7 +147,7 @@ def help_command(update: Update, _: CallbackContext) -> None:
     update.message.reply_text("Use /city CITY NAME to enter the city name.\nUse /menu to start using the covid resource bot")
 
 def bot_intro(update: Update, _: CallbackContext) -> None:
-    update.message.reply_text("HI, User I am CoviRes 'Always Ready to help'. To use me just type /city <CITY NAME> and then type /menu and choose your desired option from the options available ")
+    update.message.reply_text("HI, User I am CoviReq 'Always Ready to help'. To use me just type /city <CITY NAME> and then type /menu and choose your requirement option from the options available ")
 
 
 def main() -> None:

@@ -143,11 +143,14 @@ def button(update: Update, _: CallbackContext) -> None:
 def help_command(update: Update, _: CallbackContext) -> None:
     update.message.reply_text("Use /city CITY NAME to enter the city name.\nUse /menu to start using the covid resource bot")
 
+def bot_intro(update: Update, _: CallbackContext) -> None:
+    update.message.reply_text("HI, User I am CoviRes 'Always Ready to help'. To use me just type /city <CITY NAME> and then type /menu and choose your desired option from the options available ")
 
 def main() -> None:
     
 
     updater = Updater(http_api)
+    updater.dispatcher.add_handler(CommandHandler('start', bot_intro))
     updater.dispatcher.add_handler(CommandHandler('city', city))
     updater.dispatcher.add_handler(CommandHandler('menu', menu))
     updater.dispatcher.add_handler(CallbackQueryHandler(button))

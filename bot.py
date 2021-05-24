@@ -75,7 +75,7 @@ def time_converter(time_input):
         mins = mins - 60
         flag = 1
     hrs = hrs + 5 + flag
-    if hrs>24:
+    if hrs>=24:
         hrs = hrs-24
     if hrs<10:
         hrs = "0" + str(hrs)

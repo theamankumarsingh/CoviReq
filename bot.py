@@ -55,7 +55,10 @@ def menu(update: Update, _: CallbackContext) -> None:
     update.message.reply_text('Please choose one of the following :', reply_markup=reply_markup)
 
 def city(update, context,*args):
-    city=context.args[0]
+    try:
+        city=context.args[0]
+    except:
+        update.message.reply_text("Hey, User I also need the name of a city after /city. Let me give you an example: /city mumbai")
     update.message.reply_text("The city has been set as:"+city+"\nEnter /menu for the options")
     f = open("city.txt", "w")
     f.write(city)
@@ -143,10 +146,11 @@ def button(update: Update, _: CallbackContext) -> None:
 def help_command(update: Update, _: CallbackContext) -> None:
     update.message.reply_text("Use /city CITY NAME to enter the city name.\nUse /menu to start using the covid resource bot")
 
-def bot_intro(update: Update, _: CallbackContext) -> None:
-    update.message.reply_text("HI, User I am CoviRes 'Always Ready to help'. To use me just type /city <CITY NAME> and then type /menu and choose your desired option from the options available ")
+def bot_intro(update: Uptry:
+        city=context.args[0]
+    except:
+        update.message.reply_text("Hey, User I also need the name of a city after /city. Let me give you an example: /city mumbai")
 
-def main() -> None:
     
 
     updater = Updater(http_api)
